@@ -61,6 +61,19 @@
             "action": "restart"
           }
         }
+      },
+      {
+        "type": "guest",
+        "executable": "python",
+        "arguments": ["-u", "game/run.py", "ws://127.0.0.1:8085/ws"],
+        "options": {
+          "workdir": "..",
+          "stdout": "log",
+          "watch": {
+            "directories": ["../game"],
+            "action": "restart"
+          }
+        }
       }
     ]
 }
