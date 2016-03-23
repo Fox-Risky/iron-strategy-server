@@ -24,8 +24,6 @@ class Authentication(object):
         self._logger = logger
         self._db = db
         await self.registerAuthentication()
-        await asyncio.sleep(1)
-        await self._session.call('com.auth.initiate', 'RaitoBezarius')
 
     async def registerAuthentication(self):
         methods = {
@@ -53,8 +51,9 @@ class Authentication(object):
         await r.table('players').insert({
             "player_id": connection_token,
             "caller_id": details.caller,
+            "in_game": False,
             "username": username
-        }, { upsert: True }).run(self._db)
+        }).run(self._db)
 
         self._logger.info('{} joined the game!'.format(username))
 
